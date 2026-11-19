@@ -13,8 +13,14 @@ defaults:
     shell: bash
     working-directory: packages/contract-libraries/near_mimc
 
+# Cancel superseded PR checks; keep every non-PR invocation independent.
+concurrency:
+  group: near_mimc.yml-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test_near_mimc:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

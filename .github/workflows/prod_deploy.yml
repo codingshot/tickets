@@ -37,6 +37,7 @@ on:
 
 jobs:
   production_deploy:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

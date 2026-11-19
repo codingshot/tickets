@@ -10,6 +10,7 @@ concurrency:
 
 jobs:
   deploy-pr-to-staging:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
       # vercel envs
