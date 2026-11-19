@@ -13,8 +13,14 @@ defaults:
     shell: bash
     working-directory: packages/contract-libraries/groth_verifier
 
+# Cancel superseded PR checks; keep every non-PR invocation independent.
+concurrency:
+  group: near_groth16_verifier.yml-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test_near_groth16_verifier:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

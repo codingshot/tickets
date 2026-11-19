@@ -7,6 +7,7 @@ concurrency:
 
 jobs:
   check_build_and_tests:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     outputs:
       ACCOUNT_ID: ${{ steps.setup.outputs.account_id }}
@@ -80,6 +81,7 @@ jobs:
         run: yarn front build
 
   dev_deploy:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: check_build_and_tests
     env:
